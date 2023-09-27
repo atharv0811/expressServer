@@ -5,6 +5,7 @@ const shopRoutes = require('./routes/shop')
 const path = require('path');
 const success = require('./routes/success')
 const contactRoutes = require('./routes/contact')
+const getError = require('./controllers/errorController')
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,8 +17,6 @@ app.use(contactRoutes)
 app.use(success)
 
 
-app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
-})
+app.use(getError.get404)
 
 app.listen(4000);
